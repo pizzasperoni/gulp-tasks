@@ -113,9 +113,9 @@ gulp.task('build', ['sass:prod', 'pug:prod', 'js:prod','img:prod']);
 
 function ftpConnection() {
   return ftp.create({
-    host: 'manomanitas.es',
-    user: 'diego@manomanitas.es',
-    password: 'diego',
+    host: 'yourserver.com',
+    user: 'user@yourserver.com',
+    password: 'yourpassword123',
     parallel: 5,
     log: function(log) {console.log(log)}
   })
@@ -123,7 +123,7 @@ function ftpConnection() {
 
 gulp.task('upload', ['build'], function () {
   var ftp = ftpConnection();
-  var remoteFolder = '/sistema/web/electricista';
+  var remoteFolder = '/path/to/the/folder';
   return gulp.src('dist/**', {base: 'dist', buffer: false})
     .pipe(ftp.newer(remoteFolder))
     .pipe(ftp.dest(remoteFolder));
